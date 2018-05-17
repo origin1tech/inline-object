@@ -26,7 +26,7 @@ export declare class InlineObject {
      * Reverts a inline-object formatted string.
      *
      * @param str the string representing object to revert.
-     * @param obj rest param of objects to merge in (convenience).
+     * @param transform a transform function to run through each value.
      */
-    revert<T>(str: string, ...obj: IMap<any>[]): T;
+    revert<T>(str: string, transform?: (key: string, value: any) => any): T;
 }

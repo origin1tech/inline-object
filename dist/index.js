@@ -73,15 +73,12 @@ var InlineObject = /** @class */ (function () {
      * Reverts a inline-object formatted string.
      *
      * @param str the string representing object to revert.
-     * @param obj rest param of objects to merge in (convenience).
+     * @param transform a transform function to run through each value.
      */
-    InlineObject.prototype.revert = function (str) {
+    InlineObject.prototype.revert = function (str, transform) {
         var _this = this;
-        var obj = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            obj[_i - 1] = arguments[_i];
-        }
         var tmp = {};
+        transform = transform || this.options.transform;
         str = strip(str); // strip ansi codes from string.
         var arr = str.match(/\\?.|^$/g).reduce(function (p, c) {
             if (c === '"' || c === "'") {
@@ -103,10 +100,10 @@ var InlineObject = /** @class */ (function () {
                 var type = chek_1.getType(val);
                 val = chek_1.castType(val, type, val);
             }
-            val = _this.options.transform(key, val); // call user transform.
+            val = transform(key, val); // call user transform.
             tmp = chek_1.set(tmp, key, val);
         });
-        return chek_1.extend.apply(void 0, [{}, tmp].concat(obj));
+        return tmp;
     };
     return InlineObject;
 }());

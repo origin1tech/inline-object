@@ -1,6 +1,6 @@
 {
   "name": "inline-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Converts an object to inline string and can revert if needed.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
