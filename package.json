@@ -1,0 +1,75 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Typescript seed.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "clean": "node ./build clean",
+    "copy": "node ./build copy",
+    "compile": "node ./build compile",
+    "bump": "node ./build bump",
+    "build": "node ./build build",
+    "commit": "node ./build commit",
+    "typedoc": "node ./build docs",
+    "docs": "node ./build open",
+    "release": "node ./build release",
+    "test": "node ./build test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/origin1tech/app.git"
+  },
+  "build": {
+    "clean": [
+      "./dist"
+    ],
+    "copy": []
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "exclude": [
+      "src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "./build/spec"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "keywords": [],
+  "author": "Origin1 Technologies <origin1tech@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/origin1tech/app/issues"
+  },
+  "homepage": "https://github.com/origin1tech/app#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.10.15",
+    "chai": "^4.0.2",
+    "has-ansi": "^3.0.0",
+    "mocha": "^3.4.2",
+    "stiks": "^1.1.4",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.5.0",
+    "typedoc": "^0.7.1",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "chek": "^1.1.6",
+    "strip-ansi": "^4.0.0"
+  }
+}
