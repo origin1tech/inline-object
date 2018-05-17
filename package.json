@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "inline-object",
   "version": "1.0.0",
-  "description": "Typescript seed.",
+  "description": "Converts an object to inline string and can revert if needed.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
@@ -48,7 +48,12 @@
     "sourceMap": true,
     "instrument": true
   },
-  "keywords": [],
+  "keywords": [
+    "object",
+    "inline",
+    "inline-object",
+    "object to string"
+  ],
   "author": "Origin1 Technologies <origin1tech@gmail.com>",
   "license": "ISC",
   "bugs": {

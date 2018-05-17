@@ -2,6 +2,21 @@
 
 Formats an object into an inline string using dot notation to indicate level and position in array.
 
+#### Converts this:
+
+```ts
+  name: 'Milton Waddams',
+  quotes: [
+    'I believe you have my stapler'
+  ]
+```
+
+#### To this:
+
+```sh
+name='Milton Waddams' quote[0]='I believe you have my stapler'
+```
+
 ## Install
 
 ```sh
@@ -89,12 +104,12 @@ For example the revert arguments indicate the following:
 
 ```ts
 // indicates expects a string.
-**str**: string
+str: string
 
 // Indicates the method expects a key which is a string,
 // a value of any type and it expects a returned value of
 // any type. The "?" simply indicates that the argument is optional
-**transform**?: (key: string, value: any) => any
+transform?: (key: string, value: any) => any
 ```
 
 ### format
@@ -120,16 +135,20 @@ Rerverts a formatted inline string back to an object. Accepts additonal
 
 Assumes using one of the above import methods of your choice (ES6, Typescript or ES5).
 
+### Limiting Depth
+
 ```ts
 const formatted = inlineObj.format({
   name: 'Milton Waddams',
   movie: 'Office Space',
   year: 1999,
-  quotes: {
+  quotes: [
     // will NOT output
-  }
+  ]
 }, 0, true);
 ```
+
+### Using Transform with Revert
 
 ```ts
 const str = "name='Milton Waddams' movie='Office Space' year=1999";
@@ -139,7 +158,27 @@ const reverted = inlineObj.revert(str, function (k, v) {
     return v;
   return float; // otherwise return the parsed float/number.
 });
+```
 
+### Nested Output
+
+The output follows the same naming convention as lodash's get/set methods. If you are familiar with those this will make sense.
+
+```ts
+const formatted = inlineObj.format({
+  name: 'Milton Waddams',
+  movie: 'Office Space',
+  year: 1999,
+  quotes: [
+    'I believe you have my stapler'
+  ]
+});
+```
+
+Results in
+
+```sh
+name='Milton Waddams' movie='Office Space' year=1999 quote[0]='I believe you have my stapler'
 ```
 
 ## Test
