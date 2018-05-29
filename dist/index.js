@@ -6,6 +6,7 @@ var strip = require("strip-ansi");
 var DEFAULTS = {
     depth: null,
     colorize: false,
+    showHidden: false,
     castTypes: true,
     transform: function (k, v) { return v; } // transform method to use for reverting.
 };
@@ -39,18 +40,19 @@ var InlineObject = /** @class */ (function () {
                         }
                         else {
                             if (_this.isValidLevel(level, depth))
-                                args.push(key + "=" + util_1.inspect(v, null, null, colorize));
+                                args.push(key + "=" + util_1.inspect(v, _this.options.showHidden, null, colorize));
                         }
                     });
                 }
                 else {
+                    var key = parent ? parent + "." + k : k;
                     if (this_1.isValidLevel(level, depth))
-                        args = args.concat(this_1.formatter(val, k, depth, colorize, level));
+                        args = args.concat(this_1.formatter(val, key, depth, colorize, level));
                 }
             }
             else {
                 var key = parent ? parent + "." + k : k;
-                args.push(key + "=" + util_1.inspect(val, null, null, colorize));
+                args.push(key + "=" + util_1.inspect(val, this_1.options.showHidden, null, colorize));
             }
         };
         var this_1 = this;

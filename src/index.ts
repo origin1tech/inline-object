@@ -7,6 +7,7 @@ import * as strip from 'strip-ansi';
 const DEFAULTS: IInlineOptions = {
   depth: null,  // depth to be parsed.
   colorize: false,  // whether to use colors.
+  showHidden: false, // whether to show hidden/empty properties.
   castTypes: true,  // trys to cast to type when reverting, transform for more control.
   transform: (k, v) => v // transform method to use for reverting.
 };
@@ -56,7 +57,7 @@ export class InlineObject {
 
             else {
               if (this.isValidLevel(level, depth))
-                args.push(`${key}=${inspect(v, null, null, colorize)}`);
+                args.push(`${key}=${inspect(v, this.options.showHidden, null, colorize)}`);
             }
 
           });
@@ -64,15 +65,16 @@ export class InlineObject {
         }
 
         else {
+          const key = parent ? `${parent}.${k}` : k;
           if (this.isValidLevel(level, depth))
-            args = args.concat(this.formatter(val, k, depth, colorize, level));
+            args = args.concat(this.formatter(val, key, depth, colorize, level));
         }
 
       }
 
       else {
         const key = parent ? `${parent}.${k}` : k;
-        args.push(`${key}=${inspect(val, null, null, colorize)}`);
+        args.push(`${key}=${inspect(val, this.options.showHidden, null, colorize)}`);
       }
 
     }

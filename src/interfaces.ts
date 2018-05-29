@@ -6,6 +6,7 @@ export interface IMap<T> {
 export interface IInlineOptions {
   depth?: number;
   colorize?: boolean;
+  showHidden?: boolean;
   castTypes?: boolean;
   transform?: (key: string, val: any) => any;
 }
